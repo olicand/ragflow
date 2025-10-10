@@ -38,6 +38,9 @@ services:
       - ../history_data_agent:/ragflow/history_data_agent
       - ./service_conf.yaml.template:/ragflow/conf/service_conf.yaml.template
       - ./entrypoint.sh:/ragflow/entrypoint.sh
+      # Mount modified Python files to fix Agent.reset() issue
+      - ../agent/canvas.py:/ragflow/agent/canvas.py
+      - ../agent/test/client.py:/ragflow/agent/test/client.py
     env_file: .env
     environment:
       - TZ=${TIMEZONE}

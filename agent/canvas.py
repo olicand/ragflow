@@ -224,7 +224,13 @@ class Canvas(Graph):
         created_at = int(time.time())
         self.add_user_input(kwargs.get("query"))
         for k, cpn in self.components.items():
-            self.components[k]["obj"].reset(True)
+            # Agent.reset() takes no arguments, but ComponentBase.reset() takes only_output parameter
+            if hasattr(self.components[k]["obj"], 'reset'):
+                try:
+                    self.components[k]["obj"].reset(True)
+                except TypeError:
+                    # If reset() doesn't accept arguments (e.g., Agent class)
+                    self.components[k]["obj"].reset()
 
         for k in kwargs.keys():
             if k in ["query", "user_id", "files"] and kwargs[k]:

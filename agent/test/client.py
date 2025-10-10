@@ -36,7 +36,7 @@ if __name__ == '__main__':
         print(f"==================== Bot =====================\n>    {canvas.get_prologue()}", end='')
     query = ""
     while True:
-        canvas.reset(True)
+        canvas.reset(mem=True)
         query = input("\n==================== User =====================\n> ")
         ans = canvas.run(query=query)
         print("==================== Bot =====================\n>    ", end='')
